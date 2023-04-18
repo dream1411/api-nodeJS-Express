@@ -20,6 +20,8 @@ const swaggerOptions = {
     },
   },
   apis: ['./routes/*.js'],
+  customJs:
+  "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.0.0/swagger-ui-bundle.js",
 };
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
 app.use(cors())
@@ -28,7 +30,7 @@ app.use('/public/css', express.static('public/css'));
 app.use('/', indexRouter);
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, { customCssUrl: CSS_URL }));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.listen(port, function () {
   console.log('CORS-enabled web server listening on port ' + port)
 })
