@@ -3,6 +3,7 @@ var cors = require('cors')
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const mysql = require('mysql2');
+const options = { customCssUrl: '/public/css/swagger-ui.css',};
 require('dotenv').config();
 const port = process.env.PORT;
 
@@ -22,11 +23,11 @@ const swaggerOptions = {
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
 app.use(cors())
 app.use(express.json())
-
+app.use('/public/css', express.static('public/css'));
 app.use('/', indexRouter);
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec,options));
 app.listen(port, function () {
   console.log('CORS-enabled web server listening on port ' + port)
 })
