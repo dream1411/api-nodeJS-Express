@@ -1,0 +1,20 @@
+swagger: '2.0'
+info:
+  version: '1.0.0'
+  title: Sample API
+basePath: /api
+paths:
+  /hello:
+    get:
+      description: Returns a greeting message
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Successful response
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Hello, world!
